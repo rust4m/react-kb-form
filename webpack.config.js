@@ -91,12 +91,12 @@ module.exports = {
         from: path.join(__dirname, "./src/ambient/index.d.ts"),
         to: `${dstPath}/ambient/index.d.ts`,
       },
+      {
+        from: path.join(__dirname, "./README.md"),
+        to: `${dstPath}/README.md`,
+      },
       // {
-      //   from: path.join(__dirname, "../README.md"),
-      //   to: `${dstPath}/README.md`,
-      // },
-      // {
-      //   from: path.join(__dirname, "../CHANGELOG.md"),
+      //   from: path.join(__dirname, "./CHANGELOG.md"),
       //   to: `${dstPath}/CHANGELOG.md`,
       // },
     ]),
