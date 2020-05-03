@@ -17,8 +17,9 @@ import { useKBform } from "react-kb-form";
 
 const {
   _register,
-  _envMode,
   _handleSubmit,
+  _envMode,
+  _reset,
   watchState,
   formState,
   errorState,
@@ -37,6 +38,33 @@ useEffect(() => {
     console.log(formState.form);
   }
 }, [formState]);
+```
+
+# Available Props
+
+```javascript
+
+    _required: string;
+    _number: string;
+    _min: string;
+    _max: string;
+    _password: string;
+    _passwordrepeat: string;
+    _strongpassword: string;
+    _minlength: string;
+    _maxlength: string;
+    _length: string;
+    _email: string;
+    _amount: string;
+    _pan: string;
+    _panbasic: string;
+    _pin: string;
+    _formname: string;
+    _customrege?: string;
+    _resetbtn: string;
+    _ignore: string;
+    _phone: string;
+
 ```
 
 ## Contributing
