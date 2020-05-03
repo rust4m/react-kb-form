@@ -80,7 +80,7 @@ _phone: string;
 
 ## Contributors
 
-[Sabuhi Nazarov](https://github.com/sabuhinazarov)
+Github account - [Sabuhi Nazarov](https://github.com/sabuhinazarov)
 
 ## Contributing
 
