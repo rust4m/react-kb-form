@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "declaration": true,
+    "declarationDir": "./build",
+    "outDir": "./build"
+  },
+  "exclude": ["./build", "./node_modules", "./src/ambient"],
+  "include": ["./src"]
+}
