@@ -10,6 +10,18 @@ Use the package manager [npm](https://www.npmjs.com/package/react-kb-form) to in
 npm i react-kb-form
 ```
 
+## Features
+
+- Built with performance in mind
+- Simple usage
+- Rich collection of validation patterns
+- No third party libraries was used
+
+- Step-by-step validation
+- Form resetting
+- Watching form values
+- Environment mode
+
 ## Simple Usage
 
 ```javascript
@@ -40,7 +52,7 @@ useEffect(() => {
 }, [formState]);
 ```
 
-# Available Props
+## Available Props
 
 ```javascript
 _required: string;
@@ -65,8 +77,16 @@ _ignore: string;
 _phone: string;
 ```
 
+## Contributors
+
+[Sabuhi Nazarov](https://github.com/sabuhinazarov)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+Detailed docs coming soon ...
