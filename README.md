@@ -21,6 +21,7 @@ npm i react-kb-form
 - Form resetting
 - Watching form values
 - Environment mode
+- Usage with reusable Input components
 
 ## Simple Usage
 
