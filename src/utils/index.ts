@@ -16,13 +16,14 @@ Utils.prototype.isNumber = function (num: string): boolean {
 Utils.prototype.isNumberEvent = function (event: IHTMLInputEvent): boolean {
   const charCode = event.which ? event.which : event.keyCode;
   if (
-    ((charCode as unknown) as number) > 31 &&
-    (((charCode as unknown) as number) < 48 ||
-      ((charCode as unknown) as number) > 57)
+    (((charCode as unknown) as number) >= 48 &&
+      ((charCode as unknown) as number) <= 57) ||
+    (((charCode as unknown) as number) >= 96 &&
+      ((charCode as unknown) as number) <= 105)
   ) {
-    return false;
+    return true;
   }
-  return true;
+  return false;
 };
 
 /* method to check email validity */
