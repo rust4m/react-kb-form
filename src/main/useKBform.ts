@@ -117,13 +117,20 @@ export default function useKBform(): IUseKBform {
   const onKeyDown = useCallback((event: any, currentFormEl: ICurrent) => {
     const allowedKeyCodes =
       event.keyCode !== 8 && event.keyCode !== 190 && event.keyCode !== 46;
+    // event.keyCode !== 109 &&
+    // event.keyCode !== 107 &&
+    // event.keyCode !== 144;
+
     const numVal = currentFormEl.attributes?._number?.value;
     const lengthVal = currentFormEl.attributes?._length?.value;
 
     /* TODO refactor this if else shit)) */
     if (numVal && lengthVal) {
-      if (parseInt(lengthVal, 10) === currentFormEl.value?.length) {
-        return allowedKeyCodes && event.preventDefault();
+      if (
+        parseInt(lengthVal, 10) === currentFormEl.value?.length &&
+        allowedKeyCodes
+      ) {
+        event.preventDefault();
       }
 
       if (allowedKeyCodes) {
@@ -138,7 +145,9 @@ export default function useKBform(): IUseKBform {
     }
 
     if (parseInt(lengthVal, 10) === currentFormEl.value?.length) {
-      return allowedKeyCodes && event.preventDefault();
+      if (allowedKeyCodes) {
+        return event.preventDefault();
+      }
     }
   }, []);
 
