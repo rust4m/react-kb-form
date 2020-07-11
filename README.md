@@ -41,7 +41,7 @@ const {
 
 <form ref={_register} _formname="form" onSubmit={_handleSubmit}>
   <input name="surname" _required="true" />
-  {errorState.surname}
+  {errorState.surname && "error text"}
 
   <button type="submit">submit</button>
 </form>;
