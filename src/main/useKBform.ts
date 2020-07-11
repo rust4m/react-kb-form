@@ -165,7 +165,7 @@ export default function useKBform(): IUseKBform {
   /* function to register all forms */
   const _register = useCallback(
     (formRef: ICurrent) => {
-      current.push(formRef);
+      if (formRef !== null) current.push(formRef);
 
       current.forEach((form) => {
         if (form) {
