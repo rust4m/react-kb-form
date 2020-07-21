@@ -23,28 +23,28 @@ Validate.prototype.validate = function (): IError {
   const errors = {} as any;
 
   this.hasAttribute("_required")?.forEach(
-    ({ name, value }: IInputElement): void => {
+    ({ name, value, attributes }: IInputElement): void => {
       if (utils.isEmpty(value)) {
-        errors[name] = true;
+        errors[name] = attributes._required.value;
       }
     }
   );
 
   this.hasAttribute("_number")?.forEach(
-    ({ name, value }: IInputElement): void => {
+    ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (!utils.isNumber(value)) {
-          errors[name] = true;
+          errors[name] = attributes._number.value;
         }
       }
     }
   );
 
   this.hasAttribute("_email")?.forEach(
-    ({ name, value }: IInputElement): void => {
+    ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (!utils.isValidEmail(value)) {
-          errors[name] = true;
+          errors[name] = attributes._email.value;
         }
       }
     }
@@ -54,7 +54,7 @@ Validate.prototype.validate = function (): IError {
     ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (parseFloat(value) < parseFloat(attributes._min.value)) {
-          errors[name] = true;
+          errors[name] = `min value is ${attributes._min.value}`;
         }
       }
     }
@@ -64,7 +64,7 @@ Validate.prototype.validate = function (): IError {
     ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (parseFloat(value) > parseFloat(attributes._max.value)) {
-          errors[name] = true;
+          errors[name] = `max value is ${attributes._max.value}`;
         }
       }
     }
@@ -74,7 +74,7 @@ Validate.prototype.validate = function (): IError {
     ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (value.length < parseInt(attributes._minlength.value, 10)) {
-          errors[name] = true;
+          errors[name] = `min length is ${attributes._minlength.value}`;
         }
       }
     }
@@ -84,7 +84,7 @@ Validate.prototype.validate = function (): IError {
     ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (value.length > parseInt(attributes._maxlength.value, 10)) {
-          errors[name] = true;
+          errors[name] = `max length is ${attributes._maxlength.value}`;
         }
       }
     }
@@ -94,53 +94,57 @@ Validate.prototype.validate = function (): IError {
     ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (value.length !== parseInt(attributes._length.value, 10)) {
-          errors[name] = true;
+          errors[name] = `length must be ${attributes._length.value}`;
         }
       }
     }
   );
 
-  this.hasAttribute("_pin")?.forEach(({ name, value }: IInputElement): void => {
-    if (!utils.isEmpty(value)) {
-      if (!utils.isValidPin(value)) {
-        errors[name] = true;
+  this.hasAttribute("_pin")?.forEach(
+    ({ name, value, attributes }: IInputElement): void => {
+      if (!utils.isEmpty(value)) {
+        if (!utils.isValidPin(value)) {
+          errors[name] = attributes._pin.value;
+        }
       }
     }
-  });
+  );
 
   this.hasAttribute("_amount")?.forEach(
-    ({ name, value }: IInputElement): void => {
+    ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (!utils.isValidAmount(value)) {
-          errors[name] = true;
+          errors[name] = attributes._amount.value;
         }
       }
     }
   );
 
-  this.hasAttribute("_pan")?.forEach(({ name, value }: IInputElement): void => {
-    if (!utils.isEmpty(value)) {
-      if (!utils.isValidPan(value)) {
-        errors[name] = true;
+  this.hasAttribute("_pan")?.forEach(
+    ({ name, value, attributes }: IInputElement): void => {
+      if (!utils.isEmpty(value)) {
+        if (!utils.isValidPan(value)) {
+          errors[name] = attributes._pan.value;
+        }
       }
     }
-  });
+  );
 
   this.hasAttribute("_panbasic")?.forEach(
-    ({ name, value }: IInputElement): void => {
+    ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (!utils.isValidPanBasic(value)) {
-          errors[name] = true;
+          errors[name] = attributes._panbasic.value;
         }
       }
     }
   );
 
   this.hasAttribute("_phone")?.forEach(
-    ({ name, value }: IInputElement): void => {
+    ({ name, value, attributes }: IInputElement): void => {
       if (!utils.isEmpty(value)) {
         if (!utils.isValidPhone(value)) {
-          errors[name] = true;
+          errors[name] = attributes._phone.value;
         }
       }
     }
@@ -151,7 +155,7 @@ Validate.prototype.validate = function (): IError {
       if (!utils.isEmpty(value)) {
         const regex = RegExp(attributes._customregex.value);
         if (!regex.test(String(value.trim()))) {
-          errors[name] = true;
+          errors[name] = "this value does not match provided regex";
         }
       }
     }
@@ -167,14 +171,17 @@ Validate.prototype.validate = function (): IError {
     let password: string;
     let passwordRepeat: string;
     let finalName: string;
+    let passWordErr: string;
 
     this.hasAttribute("_password")?.forEach(
-      ({ value }: IInputElement): void => {
+      ({ value, attributes }: IInputElement): void => {
+        passWordErr = attributes._password.value;
+
         if (!utils.isEmpty(value)) {
           this.hasAttribute("_strongpassword")?.forEach(
-            ({ value, name }: IInputElement) => {
+            ({ value, name, attributes }: IInputElement) => {
               !utils.isStrongPassword(value)
-                ? (errors[name] = true)
+                ? (errors[name] = attributes._strongpassword.value)
                 : (password = value) && (errors[name] = "");
             }
           );
@@ -185,15 +192,15 @@ Validate.prototype.validate = function (): IError {
     );
 
     this.hasAttribute("_passwordrepeat")?.forEach(
-      ({ name, value }: IInputElement): void => {
+      ({ name, value, attributes }: IInputElement): void => {
         if (!utils.isEmpty(password)) {
           !utils.isEmpty(value)
             ? (passwordRepeat = value) && (finalName = name)
-            : (errors[name] = true);
+            : (errors[name] = attributes._passwordrepeat.value);
         }
 
         password !== passwordRepeat
-          ? (errors[finalName] = true)
+          ? (errors[finalName] = passWordErr)
           : (errors[finalName] = "");
       }
     );

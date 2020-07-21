@@ -40,8 +40,12 @@ const {
 } = useKBform();
 
 <form ref={_register} _formname="form" onSubmit={_handleSubmit}>
-  <input name="surname" _required="true" />
-  {errorState.surname && "error text"}
+  <input
+    name="example"
+    _required="this field is required"
+    _email="provided value is not valid email"
+  />
+  {errorState.example}
 
   <button type="submit">submit</button>
 </form>;
