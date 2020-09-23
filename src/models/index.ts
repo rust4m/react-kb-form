@@ -85,13 +85,13 @@ export interface IFormStatus {
   [name: string]: string;
 }
 
-export interface IUseKBform {
+export interface IUseKBform<TValues> {
   _register(ref: any): void;
   _handleSubmit(event: SyntheticEvent): void;
   _envMode(mode: string): void;
   _reset(formName: string): void;
   watchState?: IFormData[];
-  formState?: IFormData[];
+  formState?: TValues;
   formStatus?: IFormStatus;
   errorState?: any;
 }
