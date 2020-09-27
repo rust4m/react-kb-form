@@ -24,9 +24,9 @@ import {
 import utils from "../utils/index";
 import Validate from "../validate/core";
 
-export default function useKBform(): IUseKBform {
+export default function useKBform<TValues>(): IUseKBform<TValues> {
   /* validated form state for client */
-  const [formState, setFormState] = useState<IFormData[]>();
+  const [formState, setFormState] = useState<TValues>();
 
   /* errors state for client */
   const [errorState, setErrorState] = useState<any>({} as any);
